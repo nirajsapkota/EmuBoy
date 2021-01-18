@@ -1,0 +1,12 @@
+#define _1B     1
+#define _32B    32
+#define _64B    64
+#define _96B    96
+#define _127B   127
+#define _128B   128
+#define _160B   160
+#define _512B   512
+#define _4KB    4096
+#define _8KB    8192
+#define _16KB   16384
+#define _64KB   65536
