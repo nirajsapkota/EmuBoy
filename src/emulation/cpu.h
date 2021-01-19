@@ -16,13 +16,17 @@
 struct CPU {
 
   union {
-    uint8_t reg[4];
+    uint8_t reg[8];
     
     struct {
-      uint8_t AF[2];
-      uint8_t BC[2];
-      uint8_t DE[2];
-      uint8_t HL[2];
+      uint8_t A; // 0
+      uint8_t F; // 1
+      uint8_t B; // 2
+      uint8_t C; // 3
+      uint8_t D; // 4
+      uint8_t E; // 5
+      uint8_t H; // 6
+      uint8_t L; // 7
     };
   };
 
@@ -38,15 +42,38 @@ typedef struct CPU CPU;
 
 CPU* cpu_create();
 void cpu_destroy(CPU* cpu);
-
 void cpu_attach_mmu(CPU* cpu, MMU* mmu);
 void cpu_start(CPU* cpu);
 
 void cpu_fetch_instruction(CPU* cpu);
-void cpu_decode_instruction(uint16_t opcode);
+void cpu_decode_instruction(CPU* cpu, uint8_t instr);
 
-void cpu_execute_load8_immediate(CPU* cpu, uint8_t reg, uint8_t which, uint8_t immediate);
-void cpu_execute_load16_immediate(CPU* cpu, uint8_t reg, uint16_t immediate);
-void cpu_execute_add(CPU* cpu, uint8_t reg);
+void cpu_row_zero(CPU* cpu, uint8_t col);
+void cpu_row_one(CPU* cpu, uint8_t col);
+void cpu_row_two(CPU* cpu, uint8_t col);
+void cpu_row_three(CPU* cpu, uint8_t col);
+void cpu_row_four(CPU* cpu, uint8_t col);
+void cpu_row_five(CPU* cpu, uint8_t col);
+void cpu_row_six(CPU* cpu, uint8_t col);
+void cpu_row_seven(CPU* cpu, uint8_t col);
+void cpu_row_eight(CPU* cpu, uint8_t col);
+void cpu_row_nine(CPU* cpu, uint8_t col);
+void cpu_row_a(CPU* cpu, uint8_t col);
+void cpu_row_b(CPU* cpu, uint8_t col);
+void cpu_row_c(CPU* cpu, uint8_t col);
+void cpu_row_d(CPU* cpu, uint8_t col);
+void cpu_row_e(CPU* cpu, uint8_t col);
+void cpu_row_f(CPU* cpu, uint8_t col);
+
+void cpu_instr_load(CPU* cpu, uint8_t reg1, uint8_t reg2);
+void cpu_instr_add(CPU* cpu, uint8_t reg1, uint8_t reg2);
+void cpu_instr_sub(CPU* cpu, uint8_t reg);
+void cpu_instr_and(CPU* cpu, uint8_t reg);
+void cpu_instr_or(CPU* cpu, uint8_t reg);
+void cpu_instr_xor(CPU* cpu, uint8_t reg);
+void cpu_instr_inc16(CPU* cpu, uint8_t reg);
+void cpu_instr_dec16(CPU* cpu, uint8_t reg);
+void cpu_instr_inc8(CPU* cpu, uint8_t reg);
+void cpu_instr_dec8(CPU* cpu, uint8_t reg);
 
 #endif
